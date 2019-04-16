@@ -1,0 +1,6 @@
+framework module Pods_VRTiOSBuild {
+  umbrella header "Pods-VRTiOSBuild-umbrella.h"
+
+  export *
+  module * { export * }
+}

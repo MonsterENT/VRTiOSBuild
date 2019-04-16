@@ -56,9 +56,6 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger row = indexPath.row;
-    
-    
     if([_delegate respondsToSelector:@selector(currentCellClassWithIndexPath:)])
     {
         _cellClassStr = [_delegate currentCellClassWithIndexPath:indexPath];

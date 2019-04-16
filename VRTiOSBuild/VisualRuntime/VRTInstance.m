@@ -34,7 +34,7 @@
 @property(strong,nonatomic)Model4VRTVC* jsVC;
 @property(weak,nonatomic)UIViewController* targetVC;
 
-@property(strong,nonatomic)JSManagedValue* basicCallBack,*listCompCallBack,*textFieldReturnCallBack,*httpResponseCallBack,*didSelectAlertActionCallBack;
+@property(strong,nonatomic)JSManagedValue* basicCallBack, *listCompCallBack, *textFieldReturnCallBack, *httpResponseCallBack, *didSelectAlertActionCallBack;
 @end
 
 @implementation VRTInstance
@@ -49,7 +49,7 @@
         _param = @{};
         
         typeof(self) __weak weakSelf = self;
-        [_vrtIdToViewCache setBlockWhenSetKey:^(id  _Nonnull key, id  _Nonnull obj) {
+        [_vrtIdToViewCache setBlockWhenSetKey:^(id _Nonnull key, id _Nonnull obj) {
             UIView* view = obj;
             if([weakSelf.vrtClickCache containsObject:key] && [view isKindOfClass:[UIView class]])
             {
@@ -92,6 +92,10 @@
     
     //    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     NSString *script = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+    if(script == nil)
+    {
+        return;
+    }
     //        dispatch_async(dispatch_get_main_queue(), ^{
     [self.context evaluateScript:[frameworkJS stringByAppendingString:script]];
     [self getJSContentCallBack];
