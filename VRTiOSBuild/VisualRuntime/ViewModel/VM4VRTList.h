@@ -9,22 +9,22 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @class VRTMutableDictionary;
 @class VRTList;
 
 @class Model4VRTList;
 @class Model4VRTCell;
 
+NS_ASSUME_NONNULL_BEGIN
 @protocol VRTListDelegate <NSObject>
 
 -(void)vrtListDidSelectRowAtIndexPath:(NSIndexPath*)indexPath vrtId:(NSString*)vrtId;
 
--(void)vrtListCallBackCommitCellAtIndexPath:(NSIndexPath*)indexPath vrtId:(NSString*)vrtId;
-
--(Model4VRTCell*)getCommitedCell;
+//-(void)vrtListCallBackCommitCellAtIndexPath:(NSIndexPath*)indexPath vrtId:(NSString*)vrtId;
 @end
+
+@class VRTMutableDictionary;
+@class VRTList;
 
 @interface VM4VRTList : NSObject
 
@@ -33,11 +33,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property(strong,nonatomic)Model4VRTList* vrtlistModel;
 
 @property(assign,nonatomic)NSInteger numberOfSections;
-@property(copy,nonatomic)NSDictionary* numberOfRowsInSection;
 
 @property(weak,nonatomic)VRTMutableDictionary* outsideIdToViewCacheDic;
 
 @property(weak,nonatomic)id<VRTListDelegate> delegate;
+
+-(void)updateRowDataInSectionWithOffset:(int)offset length:(int)length dataDic:(NSDictionary*)dataDic;
 @end
 
 NS_ASSUME_NONNULL_END

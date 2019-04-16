@@ -35,8 +35,6 @@
 @property(weak,nonatomic)UIViewController* targetVC;
 
 @property(strong,nonatomic)JSManagedValue* basicCallBack,*listCompCallBack,*textFieldReturnCallBack,*httpResponseCallBack,*didSelectAlertActionCallBack;
-
-@property(strong,nonatomic)Model4VRTCell* lastCommitedCellModel;
 @end
 
 @implementation VRTInstance
@@ -158,17 +156,16 @@
         }
     };
     
-    _context[@"api_refreshListData"] = ^(NSString* vrtId,NSNumber* numberOfSections,NSDictionary* numberOfRowsAtSection){
+    _context[@"api_refreshListData"] = ^(NSString* vrtId,NSNumber* numberOfSections,NSNumber* offset,NSNumber* length,NSDictionary* rowDataAtSection){
         id view = [weakSelf.vrtIdToViewCache objectForKey:vrtId];
         
-        if([view isKindOfClass:[VRTList class]] && [numberOfSections isKindOfClass:[NSNumber class]] && [numberOfRowsAtSection isKindOfClass:[NSDictionary class]])
+        if([view isKindOfClass:[VRTList class]] && [numberOfSections isKindOfClass:[NSNumber class]] && [offset isKindOfClass:[NSNumber class]] && [length isKindOfClass:[NSNumber class]] && [rowDataAtSection isKindOfClass:[NSDictionary class]])
         {
             VM4VRTList* vm = [weakSelf.vrtListVMCache objectForKey:vrtId];
             vm.numberOfSections = [numberOfSections integerValue];
-            vm.numberOfRowsInSection = [numberOfRowsAtSection copy];
+            [vm updateRowDataInSectionWithOffset:[offset intValue] length:[length intValue] dataDic:rowDataAtSection];
             [(VRTList*)view refreshClearRowCache];
         }
-        
     };
     
     _context[@"api_platform"] =(NSString*)^(){
@@ -223,19 +220,6 @@
         }];
     };
     
-    _context[@"api_httpRequest_iKu"] = ^(JSValue* httpRequest){
-        NSDictionary* dic = [httpRequest toDictionary];
-        
-        NSString* url = VRT_SAFE_VALUE(dic[@"url"]);
-        
-        [[NetworkMEx shareInstance] postWithSubUrl:url param:VRT_SAFE_VALUE(dic[@"_param"]) block:^(id data, id info) {
-            if(data)
-            {
-                [weakSelf.httpResponseCallBack.value callWithArguments:@[url,data,info==nil?@"":info]];
-            }
-        }];
-    };
-    
     _context[@"api_getThisNavigationComp"] = (NSDictionary*)^(){
         return @{@"url":weakSelf.url==nil?@"":weakSelf.url};
     };
@@ -271,21 +255,6 @@
         [UIView animateWithDuration:_duration animations:^{
             [func callWithArguments:nil];
         }];
-    };
-    
-    _context[@"api_commitCell"] = ^(NSDictionary* cell){
-        if(![cell isKindOfClass:[NSDictionary class]])
-        {
-            return;
-        }
-        
-        if([VRT_SAFE_VALUE([cell objectForKey:@"_clsName"]) isEqualToString:@"Cell"])
-        {
-            Model4VRTCell* cellModel = [Model4VRTCell new];
-            [VRTUtils parseCommonProperty:cell toModel:cellModel];
-            cellModel.subViews = [VRTUtils parseWithSuperView:cellModel subViews:VRT_SAFE_VALUE([cell objectForKey:@"subViews"])];
-            weakSelf.lastCommitedCellModel = cellModel;
-        }
     };
 }
 
@@ -409,8 +378,7 @@
         if([view isKindOfClass:[UIImageView class]])
         {
             NSString* imgUrl = [value toString];
-#warning TODO
-            //[((UIImageView*)view) sd_setImageWithURL:[NSURL URLWithString:imgUrl]];
+            [[VRTSDKMaster shareInstance] _setImageWithUrl:imgUrl imageView:(UIImageView*)view];
         }
     }
     else if([key isEqualToString:@"textAlignment"])
@@ -457,16 +425,6 @@
 -(void)vrtListDidSelectRowAtIndexPath:(NSIndexPath *)indexPath vrtId:(NSString*)vrtId
 {
     [_listCompCallBack.value callWithArguments:@[[NSString stringWithFormat:@"%@CallBackDidSelectRowAtIndexPath",vrtId],@(indexPath.section),@(indexPath.row)]];
-}
-
--(void)vrtListCallBackCommitCellAtIndexPath:(NSIndexPath*)indexPath vrtId:(NSString*)vrtId
-{
-    [_listCompCallBack.value callWithArguments:@[[NSString stringWithFormat:@"%@CallBackCommitCellAtIndexPath",vrtId],@(indexPath.section),@(indexPath.row)]];
-}
-
--(Model4VRTCell*)getCommitedCell
-{
-    return _lastCommitedCellModel;
 }
 
 #pragma mark VRTTextFieldDelegate

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2CD6DA50277C9FCB41514A35 /* Pods_VRTiOSBuild.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E454C81C8177E7E83848D7B8 /* Pods_VRTiOSBuild.framework */; };
 		C214BF02225F9A13005BBC0F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C214BF01225F9A13005BBC0F /* AppDelegate.m */; };
 		C214BF05225F9A13005BBC0F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C214BF04225F9A13005BBC0F /* ViewController.m */; };
 		C214BF08225F9A13005BBC0F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C214BF06225F9A13005BBC0F /* Main.storyboard */; };
@@ -44,6 +45,10 @@
 		C214BFBD225FA338005BBC0F /* TVCBindHelperMEx.m in Sources */ = {isa = PBXBuildFile; fileRef = C214BFB2225FA337005BBC0F /* TVCBindHelperMEx.m */; };
 		C214BFBE225FA338005BBC0F /* TableViewMEx.m in Sources */ = {isa = PBXBuildFile; fileRef = C214BFB3225FA337005BBC0F /* TableViewMEx.m */; };
 		C214BFBF225FA338005BBC0F /* UITableViewCell+MEx.m in Sources */ = {isa = PBXBuildFile; fileRef = C214BFB4225FA337005BBC0F /* UITableViewCell+MEx.m */; };
+		C214BFC52262139A005BBC0F /* VRTProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = C214BFC42262139A005BBC0F /* VRTProtocol.m */; };
+		C21FA4FF2265C96D00DC79FB /* VRTJSFramework.js in Resources */ = {isa = PBXBuildFile; fileRef = C21FA4FE2265C96D00DC79FB /* VRTJSFramework.js */; };
+		C21FA5032265D71F00DC79FB /* VRTProtocolModule.m in Sources */ = {isa = PBXBuildFile; fileRef = C21FA5022265D71F00DC79FB /* VRTProtocolModule.m */; };
+		C21FA5072265D98D00DC79FB /* NetworkModule.m in Sources */ = {isa = PBXBuildFile; fileRef = C21FA5062265D98D00DC79FB /* NetworkModule.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +69,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4FE0CAEBEF08B3D528D6B925 /* Pods-VRTiOSBuild.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VRTiOSBuild.release.xcconfig"; path = "Pods/Target Support Files/Pods-VRTiOSBuild/Pods-VRTiOSBuild.release.xcconfig"; sourceTree = "<group>"; };
+		5CFAC1DBD4FEFCC3CAAA2C2D /* Pods-VRTiOSBuild.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VRTiOSBuild.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VRTiOSBuild/Pods-VRTiOSBuild.debug.xcconfig"; sourceTree = "<group>"; };
 		C214BEFD225F9A13005BBC0F /* VRTiOSBuild.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VRTiOSBuild.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C214BF00225F9A13005BBC0F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C214BF01225F9A13005BBC0F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -140,6 +147,14 @@
 		C214BFB5225FA337005BBC0F /* TVCBindHelperMEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVCBindHelperMEx.h; sourceTree = "<group>"; };
 		C214BFB6225FA337005BBC0F /* TableViewMEx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewMEx.h; sourceTree = "<group>"; };
 		C214BFC1225FA3B8005BBC0F /* VRTMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VRTMacro.h; sourceTree = "<group>"; };
+		C214BFC32262139A005BBC0F /* VRTProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VRTProtocol.h; sourceTree = "<group>"; };
+		C214BFC42262139A005BBC0F /* VRTProtocol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VRTProtocol.m; sourceTree = "<group>"; };
+		C21FA4FE2265C96D00DC79FB /* VRTJSFramework.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = VRTJSFramework.js; sourceTree = "<group>"; };
+		C21FA5012265D71F00DC79FB /* VRTProtocolModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VRTProtocolModule.h; sourceTree = "<group>"; };
+		C21FA5022265D71F00DC79FB /* VRTProtocolModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VRTProtocolModule.m; sourceTree = "<group>"; };
+		C21FA5052265D98D00DC79FB /* NetworkModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkModule.h; sourceTree = "<group>"; };
+		C21FA5062265D98D00DC79FB /* NetworkModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkModule.m; sourceTree = "<group>"; };
+		E454C81C8177E7E83848D7B8 /* Pods_VRTiOSBuild.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VRTiOSBuild.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CD6DA50277C9FCB41514A35 /* Pods_VRTiOSBuild.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +183,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0104A644717CD477C5409300 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E454C81C8177E7E83848D7B8 /* Pods_VRTiOSBuild.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		24DB43EAFD7069590ABB4611 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5CFAC1DBD4FEFCC3CAAA2C2D /* Pods-VRTiOSBuild.debug.xcconfig */,
+				4FE0CAEBEF08B3D528D6B925 /* Pods-VRTiOSBuild.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		C214BEF4225F9A13005BBC0F = {
 			isa = PBXGroup;
 			children = (
@@ -174,6 +207,8 @@
 				C214BF18225F9A14005BBC0F /* VRTiOSBuildTests */,
 				C214BF23225F9A14005BBC0F /* VRTiOSBuildUITests */,
 				C214BEFE225F9A13005BBC0F /* Products */,
+				24DB43EAFD7069590ABB4611 /* Pods */,
+				0104A644717CD477C5409300 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -190,9 +225,10 @@
 		C214BEFF225F9A13005BBC0F /* VRTiOSBuild */ = {
 			isa = PBXGroup;
 			children = (
+				C21FA5002265D6F300DC79FB /* Support */,
 				C214BFA0225FA2BE005BBC0F /* Base */,
-				C214BF9F225F9F60005BBC0F /* PrefixHeader.pch */,
 				C214BF32225F9A80005BBC0F /* VisualRuntime */,
+				C214BF9F225F9F60005BBC0F /* PrefixHeader.pch */,
 				C214BF00225F9A13005BBC0F /* AppDelegate.h */,
 				C214BF01225F9A13005BBC0F /* AppDelegate.m */,
 				C214BF03225F9A13005BBC0F /* ViewController.h */,
@@ -227,6 +263,8 @@
 		C214BF32225F9A80005BBC0F /* VisualRuntime */ = {
 			isa = PBXGroup;
 			children = (
+				C21FA4FE2265C96D00DC79FB /* VRTJSFramework.js */,
+				C214BFC22262135A005BBC0F /* Protocol */,
 				C214BFC1225FA3B8005BBC0F /* VRTMacro.h */,
 				C214BF41225F9A80005BBC0F /* VRTInstance.h */,
 				C214BF36225F9A80005BBC0F /* VRTInstance.m */,
@@ -361,6 +399,34 @@
 			path = TableView;
 			sourceTree = "<group>";
 		};
+		C214BFC22262135A005BBC0F /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				C214BFC32262139A005BBC0F /* VRTProtocol.h */,
+				C214BFC42262139A005BBC0F /* VRTProtocol.m */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		C21FA5002265D6F300DC79FB /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				C21FA5042265D98D00DC79FB /* NetworkModule */,
+				C21FA5012265D71F00DC79FB /* VRTProtocolModule.h */,
+				C21FA5022265D71F00DC79FB /* VRTProtocolModule.m */,
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		C21FA5042265D98D00DC79FB /* NetworkModule */ = {
+			isa = PBXGroup;
+			children = (
+				C21FA5052265D98D00DC79FB /* NetworkModule.h */,
+				C21FA5062265D98D00DC79FB /* NetworkModule.m */,
+			);
+			path = NetworkModule;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -368,9 +434,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C214BF29225F9A15005BBC0F /* Build configuration list for PBXNativeTarget "VRTiOSBuild" */;
 			buildPhases = (
+				4302F3F4CEC14E96F9863F52 /* [CP] Check Pods Manifest.lock */,
 				C214BEF9225F9A13005BBC0F /* Sources */,
 				C214BEFA225F9A13005BBC0F /* Frameworks */,
 				C214BEFB225F9A13005BBC0F /* Resources */,
+				0D5AC6C15507F824FD03D648 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -467,6 +535,7 @@
 				C214BF0D225F9A14005BBC0F /* LaunchScreen.storyboard in Resources */,
 				C214BF0A225F9A14005BBC0F /* Assets.xcassets in Resources */,
 				C214BF08225F9A13005BBC0F /* Main.storyboard in Resources */,
+				C21FA4FF2265C96D00DC79FB /* VRTJSFramework.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,12 +555,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0D5AC6C15507F824FD03D648 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-VRTiOSBuild/Pods-VRTiOSBuild-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VRTiOSBuild/Pods-VRTiOSBuild-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4302F3F4CEC14E96F9863F52 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VRTiOSBuild-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C214BEF9225F9A13005BBC0F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				C214BF61225F9A80005BBC0F /* VRTTapGestureRecognizer.m in Sources */,
+				C21FA5072265D98D00DC79FB /* NetworkModule.m in Sources */,
 				C214BFB8225FA338005BBC0F /* NetworkMEx.m in Sources */,
 				C214BF68225F9A80005BBC0F /* Model4VRTCell.m in Sources */,
 				C214BF6E225F9A80005BBC0F /* VRTImageView.m in Sources */,
@@ -500,6 +611,7 @@
 				C214BFBF225FA338005BBC0F /* UITableViewCell+MEx.m in Sources */,
 				C214BF6C225F9A80005BBC0F /* VRTCell.m in Sources */,
 				C214BF67225F9A80005BBC0F /* Model4VRTView.m in Sources */,
+				C214BFC52262139A005BBC0F /* VRTProtocol.m in Sources */,
 				C214BF10225F9A14005BBC0F /* main.m in Sources */,
 				C214BF6A225F9A80005BBC0F /* Model4VRTVC.m in Sources */,
 				C214BF66225F9A80005BBC0F /* Model4VRTLabel.m in Sources */,
@@ -522,6 +634,7 @@
 				C214BF02225F9A13005BBC0F /* AppDelegate.m in Sources */,
 				C214BF6B225F9A80005BBC0F /* Model4VRTImageView.m in Sources */,
 				C214BF62225F9A80005BBC0F /* VRTViewController.m in Sources */,
+				C21FA5032265D71F00DC79FB /* VRTProtocolModule.m in Sources */,
 				C214BFBE225FA338005BBC0F /* TableViewMEx.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -691,6 +804,7 @@
 		};
 		C214BF2A225F9A15005BBC0F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5CFAC1DBD4FEFCC3CAAA2C2D /* Pods-VRTiOSBuild.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -709,6 +823,7 @@
 		};
 		C214BF2B225F9A15005BBC0F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4FE0CAEBEF08B3D528D6B925 /* Pods-VRTiOSBuild.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

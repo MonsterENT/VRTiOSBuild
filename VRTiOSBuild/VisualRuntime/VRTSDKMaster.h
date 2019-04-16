@@ -8,29 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
-#warning TODO
+#import "Protocol/VRTProtocol.h"
 #import "../Base/Network/NetworkMEx.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-@protocol VRTSDKMasterDelegate <NSObject>
-
--(CGFloat)getNavigationBarHeight;
--(CGFloat)getTabBarHeight;
-
-@end
-
 
 @interface VRTSDKMaster : NSObject
 
 +(instancetype)shareInstance;
 
-@property(strong,nonatomic)NetworkMEx* httpAdapter;
+@property(strong,nonatomic, readonly)NetworkMEx* httpAdapter;
 
-@property(weak,nonatomic)id<VRTSDKMasterDelegate> delegate;
+@property(assign,nonatomic)CGFloat naBarHeight, tabBarHeight, statusBarHeight;
 
-@property(assign,nonatomic)CGFloat naBarHeight,tabBarHeight,statusBarHeight;
+-(void)setMasterDelegate:(VRTProtocol*)delegate;
+-(void)setNetworkAdapter:(NetworkMEx*)adapter;
 
+-(void)_setImageWithUrl:(NSString*)url imageView:(UIImageView*)imgView;
 @end
 
 NS_ASSUME_NONNULL_END

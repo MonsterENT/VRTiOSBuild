@@ -71,7 +71,9 @@ static NetworkMEx* instance;
     {
         NSString* token = [_userModelDelegate userTokenNetworking];
         if(token)
+        {
             [tempParam setObject:token forKey:PACK_Token];
+        }
     }
     [tempParam setObject:@"iOS" forKey:PACK_UserDevice];
     [PACK_ModuleInstance POSTHttpRequestWithSubUrl:url param:[tempParam copy] successBlock:^(id data, id info) {

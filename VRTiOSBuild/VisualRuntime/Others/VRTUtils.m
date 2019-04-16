@@ -9,6 +9,7 @@
 #import "VRTUtils.h"
 
 #import "../VRTInstance.h"
+#import "../VRTSDKMaster.h"
 
 #import "../View/VRTImageView.h"
 #import "../View/VRTLabel.h"
@@ -72,7 +73,7 @@
         {
             view = [Model4VRTLabel new];
             ((Model4VRTLabel*)view).text = VRT_SAFE_VALUE(jsView[@"text"]);
-            ((Model4VRTLabel*)view).fontSize = [jsView[@"fontSize"] unsignedIntegerValue];
+            ((Model4VRTLabel*)view).fontSize = [jsView[@"fontSize"] unsignedIntegerValue] * 1.0f * kFontPx2PtScale;
             ((Model4VRTLabel*)view).textAlignment = VRT_SAFE_VALUE(jsView[@"textAlignment"]);
             ((Model4VRTLabel*)view).textColor = [VRTUtils getVRTColorFromDic:VRT_SAFE_VALUE(jsView[@"textColor"])];
         }
@@ -85,7 +86,7 @@
         {
             view = [Model4VRTTextField new];
             ((Model4VRTTextField*)view).text = VRT_SAFE_VALUE(jsView[@"text"]);
-            ((Model4VRTTextField*)view).fontSize = [VRT_SAFE_VALUE(jsView[@"fontSize"]) unsignedIntegerValue];
+            ((Model4VRTTextField*)view).fontSize = [VRT_SAFE_VALUE(jsView[@"fontSize"]) unsignedIntegerValue] * 1.0f * kFontPx2PtScale;
             ((Model4VRTTextField*)view).textAlignment = VRT_SAFE_VALUE(jsView[@"textAlignment"]);
             ((Model4VRTTextField*)view).textColor = [VRTUtils getVRTColorFromDic:VRT_SAFE_VALUE(jsView[@"textColor"])];
         }
@@ -166,7 +167,9 @@
 +(void)parseModelToView:(UIView*)view vrtModel:(Model4VRTView*)vrtModel compDelegate:(nullable VRTInstance*)vrtInstance
 {
     if(!vrtModel || !view)
+    {
         return;
+    }
     
     if([vrtModel isKindOfClass:[Model4VRTLabel class]])
     {
@@ -181,11 +184,12 @@
         view.clipsToBounds  = YES;
         if([((Model4VRTImageView*)vrtModel).imageUrl containsString:@"http"])
         {
-#warning TODO
-//            [((VRTImageView*)view) sd_setImageWithURL:[NSURL URLWithString:((Model4VRTImageView*)vrtModel).imageUrl]];
+            [[VRTSDKMaster shareInstance] _setImageWithUrl:((Model4VRTImageView*)vrtModel).imageUrl imageView:((VRTImageView*)view)];
         }
         else
+        {
             [(VRTImageView*)view setImage:[UIImage imageNamed:((Model4VRTImageView*)vrtModel).imageUrl]];
+        }
         
     }
     else if([vrtModel isKindOfClass:[Model4VRTTextField class]])

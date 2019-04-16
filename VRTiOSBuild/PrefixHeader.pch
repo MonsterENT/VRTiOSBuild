@@ -55,9 +55,9 @@ block();\
 #define kScreen_Width [UIScreen mainScreen].bounds.size.width
 
 /* 比例 */
-#define kFontScale ([UIScreen mainScreen].bounds.size.width)/375.0
-#define kWidthScale  ([UIScreen mainScreen].bounds.size.width)/375.0
-#define kHeightScale ([UIScreen mainScreen].bounds.size.height)/667.0
+//#define kFontScale ([UIScreen mainScreen].bounds.size.width)/375.0
+//#define kWidthScale  ([UIScreen mainScreen].bounds.size.width)/375.0
+//#define kHeightScale ([UIScreen mainScreen].bounds.size.height)/667.0
 
 #import <objc/runtime.h>
 
@@ -80,17 +80,6 @@ block();\
 
 #import "WeakMutableArray.h"
 #import "TVCBindHelperMEx.h"
-
-#define COMMON_DARK (rgba(50,51,52,1))
-#define COMMON_DARK_DEEP (rgba(40,41,42,1))
-#define COMMON_LIGHT (rgba(165,166,167,1))
-
-#define COMMON_YELLOW (rgba(255,153,18,1))
-#define COMMON_FONT ([UIFont systemFontOfSize:12*kFontScale])
-#define COMMON_IconSize (18*kFontScale)
-#define COMMON_Radius (5*kHeightScale)
-#define COMMON_Alpha (0.75)
-
 #endif /* PrefixHeader_pch */
 
 #endif

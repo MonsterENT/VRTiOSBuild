@@ -8,6 +8,11 @@
 
 #import "VRTSDKMaster.h"
 
+@interface VRTSDKMaster()
+@property(weak, nonatomic)id<VRTSDKMasterDelegate> sdkMasterDelegate;
+@property(weak, nonatomic)id<VRTImageWithURL> imgUrlDelegate;
+@end
+
 @implementation VRTSDKMaster
 
 +(instancetype)shareInstance
@@ -24,21 +29,34 @@
     self = [super init];
     if(self)
     {
-        _httpAdapter = [NetworkMEx new];
-#warning TODO
-//        [_httpAdapter setNetworkModuleInstance:[[NetworkModule alloc]init]];
     }
     return self;
 }
 
+-(void)setMasterDelegate:(VRTProtocol*)delegate
+{
+    _imgUrlDelegate = (id<VRTImageWithURL>)delegate;
+    _sdkMasterDelegate = (id<VRTSDKMasterDelegate>)delegate;
+}
+
+-(void)setNetworkAdapter:(NetworkMEx*)adapter
+{
+    _httpAdapter = adapter;
+}
+
+-(void)_setImageWithUrl:(NSString*)url imageView:(UIImageView*)imgView
+{
+    [_imgUrlDelegate setImageWithUrl:url withImageView:imgView];
+}
+
 -(CGFloat)naBarHeight
 {
-    return [_delegate getNavigationBarHeight];
+    return [_sdkMasterDelegate getNavigationBarHeight];
 }
 
 -(CGFloat)tabBarHeight
 {
-    return [_delegate getTabBarHeight];
+    return [_sdkMasterDelegate getTabBarHeight];
 }
 
 -(CGFloat)statusBarHeight

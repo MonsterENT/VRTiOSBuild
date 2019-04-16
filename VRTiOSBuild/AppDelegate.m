@@ -7,6 +7,12 @@
 //
 
 #import "AppDelegate.h"
+#import "VisualRuntime/VRTSDKMaster.h"
+#import "VisualRuntime/Protocol/VRTProtocol.h"
+#import "Support/VRTProtocolModule.h"
+
+#import "Base/Network/NetworkMEx.h"
+#import "Support/NetworkModule/NetworkModule.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +23,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    NetworkMEx* httpAdapter = [NetworkMEx new];
+    [httpAdapter setNetworkModuleInstance:[[NetworkModule alloc]init]];
+    
+    [[VRTSDKMaster shareInstance] setMasterDelegate:[VRTProtocolModule new]];
+    [[VRTSDKMaster shareInstance] setNetworkAdapter:httpAdapter];
     return YES;
 }
 

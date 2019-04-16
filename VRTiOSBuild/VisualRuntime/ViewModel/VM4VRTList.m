@@ -18,7 +18,7 @@
 #import "../Model/Model4VRTCell.h"
 
 @interface VM4VRTList()<TVMExDelegate>
-
+@property(copy,nonatomic)NSMutableDictionary* rowDataInSection;
 @end
 
 @implementation VM4VRTList
@@ -29,9 +29,65 @@
     if(self)
     {
         _numberOfSections = 0;
-        _numberOfRowsInSection = @{};
+        _rowDataInSection = [NSMutableDictionary new];
     }
     return self;
+}
+
+-(void)updateRowDataInSectionWithOffset:(int)offset length:(int)length dataDic:(NSDictionary*)dataDic
+{
+    NSMutableDictionary* tmpDic = [NSMutableDictionary new];
+    if(offset < 0)
+    {
+        for(NSString* key in dataDic.allKeys)
+        {
+            NSArray* rowDatas = dataDic[key];
+            if(![rowDatas isKindOfClass:[NSArray class]])
+            {
+                continue;
+            }
+            NSMutableArray* rowDataResolved = [NSMutableArray new];
+            for(NSDictionary* dic in rowDatas)
+            {
+                if(![dic isKindOfClass:[NSDictionary class]])
+                {
+                    continue;
+                }
+                if([VRT_SAFE_VALUE([dic objectForKey:@"_clsName"]) isEqualToString:@"Cell"])
+                {
+                    Model4VRTCell* cellModel = [Model4VRTCell new];
+                    [VRTUtils parseCommonProperty:dic toModel:cellModel];
+                    cellModel.subViews = [VRTUtils parseWithSuperView:cellModel subViews:VRT_SAFE_VALUE([dic objectForKey:@"subViews"])];
+                    [rowDataResolved addObject:cellModel];
+                }
+            }
+            [tmpDic setObject:rowDataResolved forKey:key];
+        }
+    }
+    else
+    {
+        NSString* key = [NSString stringWithFormat:@"%d", offset];
+        NSArray* rowDatas = dataDic[key];
+        if([rowDatas isKindOfClass:[NSArray class]])
+        {
+            NSMutableArray* rowDataResolved = [NSMutableArray new];
+            for(NSDictionary* dic in rowDatas)
+            {
+                if([dic isKindOfClass:[NSDictionary class]])
+                {
+                    if([VRT_SAFE_VALUE([dic objectForKey:@"_clsName"]) isEqualToString:@"Cell"])
+                    {
+                        Model4VRTCell* cellModel = [Model4VRTCell new];
+                        [VRTUtils parseCommonProperty:dic toModel:cellModel];
+                        cellModel.subViews = [VRTUtils parseWithSuperView:cellModel subViews:VRT_SAFE_VALUE([dic objectForKey:@"subViews"])];
+                        [rowDataResolved addObject:cellModel];
+                    }
+                }
+            }
+            [tmpDic setObject:rowDataResolved forKey:key];
+        }
+    }
+    _rowDataInSection = [tmpDic copy];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -43,20 +99,20 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSNumber* count = _numberOfRowsInSection[[NSString stringWithFormat:@"%ld",(long)section]];
-    if([count isKindOfClass:[NSNumber class]])
-        return [count integerValue];
-    
+    NSArray* rowData = _rowDataInSection[[NSString stringWithFormat:@"%ld",(long)section]];
+    if([rowData isKindOfClass:[NSArray class]])
+    {
+        return [rowData count];
+    }
     return 0;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     VRTCell* cell = [tableView dequeueReusableCellWithIdentifier:@"vrtReuseCellId"];
     
-    [_delegate vrtListCallBackCommitCellAtIndexPath:indexPath vrtId:self.vrtlistModel.vrtId];
-    Model4VRTCell* cellModel = [_delegate getCommitedCell];
+    NSArray* rowData = _rowDataInSection[[NSString stringWithFormat:@"%ld",(long)indexPath.section]];
+    Model4VRTCell* cellModel = rowData[indexPath.row];
     NSAssert(cellModel != nil, @"cellModel can not be nil");
     
     if(!cell)
