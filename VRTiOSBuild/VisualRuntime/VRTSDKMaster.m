@@ -9,8 +9,8 @@
 #import "VRTSDKMaster.h"
 
 @interface VRTSDKMaster()
-@property(weak, nonatomic)id<VRTSDKMasterDelegate> sdkMasterDelegate;
-@property(weak, nonatomic)id<VRTImageWithURL> imgUrlDelegate;
+@property(strong, nonatomic)id<VRTSDKMasterDelegate> sdkMasterDelegate;
+@property(strong, nonatomic)id<VRTImageWithURL> imgUrlDelegate;
 @end
 
 @implementation VRTSDKMaster

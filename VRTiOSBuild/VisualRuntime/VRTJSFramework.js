@@ -576,14 +576,6 @@ function HttpRequest(url,func)
         api_httpRequest(this);
     }
     
-    this.request_oniKu = function(param)
-    {
-        if(param == null)
-            this._param = {};
-        else
-            this._param = param;
-        api_httpRequest_iKu(this);
-    }
     _vrt_httpRqe_Cache[url] = func;
 }
 
