@@ -24,6 +24,7 @@
 #import "../VRTMacro.h"
 
 #import "../Others/VRTMutableDictionary.h"
+#import "../Others/VRTTapGestureRecognizer.h"
 
 @implementation VRTUtils
 
@@ -112,12 +113,14 @@
 
 +(void)parseCommonProperty:(NSDictionary*)jsView toModel:(Model4VRTView*)viewModel
 {
-    viewModel.x = [VRT_SAFE_VALUE(jsView[@"_x"]) floatValue];
-    viewModel.y = [VRT_SAFE_VALUE(jsView[@"_y"]) floatValue];
-    viewModel.height = [VRT_SAFE_VALUE(jsView[@"_height"]) floatValue];
-    viewModel.width = [VRT_SAFE_VALUE(jsView[@"_width"]) floatValue];
-    viewModel.cornerRadius = [VRT_SAFE_VALUE(jsView[@"cornerRadius"]) floatValue];
+    viewModel.x = [VRT_SAFE_VALUE(jsView[@"_x"]) floatValue] * kWidthPx2PtScale;
+    viewModel.y = [VRT_SAFE_VALUE(jsView[@"_y"]) floatValue] * kWidthPx2PtScale;
+    viewModel.height = [VRT_SAFE_VALUE(jsView[@"_height"]) floatValue] * kWidthPx2PtScale;
+    viewModel.width = [VRT_SAFE_VALUE(jsView[@"_width"]) floatValue] * kWidthPx2PtScale;
+    viewModel.cornerRadius = [VRT_SAFE_VALUE(jsView[@"cornerRadius"]) floatValue] * kWidthPx2PtScale;
     viewModel.vrtId = [NSString stringWithFormat:@"%@",VRT_SAFE_VALUE(jsView[@"_vrtId"])];
+    viewModel.enableUserInteraction = [VRT_SAFE_VALUE(jsView[@"_enabledUserInteraction"]) boolValue];
+#warning TODO
     viewModel.superView = nil;
     
     viewModel.backgroundColor = [VRTUtils getVRTColorFromDic:VRT_SAFE_VALUE(jsView[@"backgroundColor"])];
@@ -152,7 +155,17 @@
         }
         
         if(!view)
+        {
             continue;
+        }
+        
+        if(vrtView.enableUserInteraction)
+        {
+            view.userInteractionEnabled = true;
+            VRTTapGestureRecognizer* tap = [[VRTTapGestureRecognizer alloc]initWithTarget:vrtInstance action:@selector(tapClickFNCenter:)];
+            tap.vrtId = vrtView.vrtId;
+            [view addGestureRecognizer:tap];
+        }
         
         [VRTUtils parseModelToView:view vrtModel:vrtView compDelegate:vrtInstance];
         

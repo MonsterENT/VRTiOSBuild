@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(strong,nonatomic)UIColor* backgroundColor;
 
+@property(assign, nonatomic)bool enableUserInteraction;
+
 @end
 
 NS_ASSUME_NONNULL_END

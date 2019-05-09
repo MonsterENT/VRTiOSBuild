@@ -22,10 +22,10 @@
 #import "Model/Model4VRTVC.h"
 #import "Model/Model4VRTCell.h"
 
-#import "Others/VRTTapGestureRecognizer.h"
 #import "Others/VRTViewController.h"
 #import "Others/VRTMutableDictionary.h"
 #import "Others/VRTUtils.h"
+#import "Others/VRTTapGestureRecognizer.h"
 
 @interface VRTInstance()<VRTListDelegate,VRTTextFieldDelegate>
 @property(strong,nonatomic)JSContext* context;
@@ -50,22 +50,8 @@
         
         typeof(self) __weak weakSelf = self;
         [_vrtIdToViewCache setBlockWhenSetKey:^(id _Nonnull key, id _Nonnull obj) {
-            UIView* view = obj;
-            if([weakSelf.vrtClickCache containsObject:key] && [view isKindOfClass:[UIView class]])
-            {
-                if(view)
-                {
-                    view.userInteractionEnabled = true;
-                    VRTTapGestureRecognizer* tap = [[VRTTapGestureRecognizer alloc]initWithTarget:weakSelf action:@selector(tapClickFNCenter:)];
-                    
-                    typeof(self) self = weakSelf;
-                    NSAssert1([key isKindOfClass:[NSString class]], @"the key : %@ is not a string value", key);
-                    tap.vrtId = key;
-                    [view addGestureRecognizer:tap];
-                }
-            }
         }];
-        _vrtClickCache = [NSMutableArray new];
+        
         _context = [JSContext new];
         [self registerContextBlock];
     }
@@ -123,22 +109,22 @@
 
 -(void)viewDidLoad_CallBack
 {
-    [_basicCallBack.value callWithArguments:@[[NSString stringWithFormat:@"%@CallBackViewDidLoad",_jsVC.vrtId]]];
+    [_basicCallBack.value callWithArguments:@[@"CallBackViewDidLoad"]];
 }
 
 -(void)viewWillAppear_CallBack
 {
-    [_basicCallBack.value callWithArguments:@[[NSString stringWithFormat:@"%@CallBackViewWillAppear",_jsVC.vrtId]]];
+    [_basicCallBack.value callWithArguments:@[@"CallBackViewWillAppear"]];
 }
 
 -(void)viewDidAppear_CallBack
 {
-    [_basicCallBack.value callWithArguments:@[[NSString stringWithFormat:@"%@CallBackViewDidAppear",_jsVC.vrtId]]];
+    [_basicCallBack.value callWithArguments:@[@"CallBackViewDidAppear"]];
 }
 
 -(void)viewWillDisappear_CallBack
 {
-    [_basicCallBack.value callWithArguments:@[[NSString stringWithFormat:@"%@CallBackViewWillDisappear",_jsVC.vrtId]]];
+    [_basicCallBack.value callWithArguments:@[@"CallBackViewWillDisappear"]];
 }
 
 -(void)registerContextBlock
@@ -181,36 +167,6 @@
             NSLog(@"%@",logInfo);
     };
     
-    _context[@"api_getBaseViewHeight"] = (NSNumber*)^(NSNumber* hasNavigationBar,NSNumber* hasTabBar){
-        //        return @(weakSelf.targetVC.view.frame.size.height);
-        CGFloat height = kScreen_Height;
-        if([hasNavigationBar boolValue] == YES)
-        {
-            height -= [VRTSDKMaster shareInstance].statusBarHeight + [VRTSDKMaster shareInstance].naBarHeight;
-        }
-        if([hasTabBar boolValue] == YES)
-        {
-            height -= [VRTSDKMaster shareInstance].tabBarHeight;
-        }
-        return @(height);
-    };
-    
-    _context[@"api_getBaseViewWidth"] = (NSNumber*)^(){
-        return @(kScreen_Width);
-    };
-    
-    _context[@"api_addViewClick"] = ^(NSString* vrtId){
-        [weakSelf.vrtClickCache addObject:vrtId];
-        UIView* view = [weakSelf.vrtIdToViewCache objectForKey:vrtId];
-        if(view)
-        {
-            view.userInteractionEnabled = true;
-            VRTTapGestureRecognizer* tap = [[VRTTapGestureRecognizer alloc]initWithTarget:weakSelf action:@selector(tapClickFNCenter:)];
-            tap.vrtId = vrtId;
-            [view addGestureRecognizer:tap];
-        }
-    };
-    
     _context[@"api_httpRequest"] = ^(JSValue* httpRequest){
         NSDictionary* dic = [httpRequest toDictionary];
         
@@ -219,13 +175,13 @@
         [[VRTSDKMaster shareInstance].httpAdapter postWithSubUrl:url param:VRT_SAFE_VALUE(dic[@"_param"]) block:^(id data, id info) {
             if(data)
             {
-                [weakSelf.httpResponseCallBack.value callWithArguments:@[url,data,info==nil?@"":info]];
+                [weakSelf.httpResponseCallBack.value callWithArguments:@[url, data, info== nil ? @"" : info]];
             }
         }];
     };
     
     _context[@"api_getThisNavigationComp"] = (NSDictionary*)^(){
-        return @{@"url":weakSelf.url==nil?@"":weakSelf.url};
+        return @{@"url" : weakSelf.url == nil ? @"" : weakSelf.url};
     };
     
     _context[@"api_pushUrlWithParam"] = ^(NSString* url,NSDictionary* param){
@@ -252,9 +208,13 @@
     
     _context[@"api_dispatchWithAnimation"] = ^(NSNumber* duration,JSValue* func){
         if(![duration isKindOfClass:[NSNumber class]])
+        {
             return ;
+        }
         if(![func isKindOfClass:[JSValue class]])
+        {
             return ;
+        }
         NSTimeInterval _duration = [duration doubleValue];
         [UIView animateWithDuration:_duration animations:^{
             [func callWithArguments:nil];
@@ -278,7 +238,7 @@
             NSString* acId = VRT_SAFE_VALUE(actionDic[@"_acId"]);
             NSString* title = VRT_SAFE_VALUE(actionDic[@"title"]);
             UIAlertAction* action = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [weakSelf.didSelectAlertActionCallBack.value callWithArguments:@[acId==nil?@"":acId]];
+                [weakSelf.didSelectAlertActionCallBack.value callWithArguments:@[acId == nil ? @"" : acId]];
             }];
             
             [ac addAction:action];
@@ -403,6 +363,9 @@
     {
         return;
     }
+    
+    typeof(self) __weak weakSelf = self;
+    
     _jsVC = [Model4VRTVC new];
     _jsVC.title = VRT_SAFE_VALUE(self.jsDic[@"title"]);
     _jsVC.vrtId = VRT_SAFE_VALUE(self.jsDic[@"_vrtId"]);
@@ -410,7 +373,7 @@
     
     _targetVC.view.backgroundColor = _jsVC.view.backgroundColor;
     [_vrtIdToViewCache setObject:_targetVC.view forKey:[NSString stringWithFormat:@"%@",_jsVC.view.vrtId]];
-    [VRTUtils jsModelToNativeSuperView:_targetVC.view subViews:_jsVC.view.subViews compDelegate:self];
+    [VRTUtils jsModelToNativeSuperView:_targetVC.view subViews:_jsVC.view.subViews compDelegate:weakSelf];
 }
 
 

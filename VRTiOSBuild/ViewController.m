@@ -20,9 +20,15 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor blackColor];
     _vrtInstance = [VRTInstance new];
-    [_vrtInstance excuteRemoteJS:[NSURL URLWithString:@"http://21xa689434.imwork.net:8090/public/tmp/personalHomePage.js"] onViewController:self];
+    [_vrtInstance excuteRemoteJS:[NSURL URLWithString:@"http://21xa689434.imwork.net:8090/public/tmp/VRTDebugger.js"] onViewController:self];
     
     [_vrtInstance viewDidLoad_CallBack];
+//    UILabel* main = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
+//    main.text = @"FFF";
+//    main.backgroundColor = [UIColor whiteColor];
+//    main.font = [UIFont systemFontOfSize:15];
+//    [self.view addSubview:main];
+    
 }
 
 

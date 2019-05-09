@@ -25,7 +25,6 @@
 @property(copy,nonatomic)NSDictionary* param;
 
 @property(strong,nonatomic)VRTMutableDictionary* vrtIdToViewCache;
-@property(strong,nonatomic)NSMutableArray* vrtClickCache;
 @property(strong,nonatomic)VRTMutableDictionary* vrtListVMCache;
 
 @end
