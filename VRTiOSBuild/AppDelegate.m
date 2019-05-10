@@ -27,7 +27,7 @@
     // Override point for customization after application launch.
     
     NetworkMEx* httpAdapter = [NetworkMEx new];
-    [httpAdapter setNetworkModuleInstance:[[NetworkModule alloc]init]];
+    [httpAdapter setNetworkModuleInstance:[[NetworkModule alloc]initWithSSL:true]];
     
     [[VRTSDKMaster shareInstance] setMasterDelegate:[VRTProtocolModule new]];
     [[VRTSDKMaster shareInstance] setNetworkAdapter:httpAdapter];

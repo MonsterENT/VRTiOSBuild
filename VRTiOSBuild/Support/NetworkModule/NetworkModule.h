@@ -11,5 +11,6 @@
 
 @interface NetworkModule : AFHTTPSessionManager<NetWorkMExModuleDelegate>
 
+-(instancetype)initWithSSL:(BOOL)enableSSL;
 
 @end

@@ -9,23 +9,26 @@
 #import "NetworkModule.h"
 
 @interface NetworkModule()
-
+@property(assign, nonatomic)BOOL enableSSL;
 @end
 @implementation NetworkModule
+
+-(instancetype)initWithSSL:(BOOL)enableSSL
+{
+    _enableSSL = true;
+    self = [self initWithBaseURL:nil];
+    return self;
+}
 
 -(instancetype)initWithBaseURL:(NSURL *)url
 {
     self = [super initWithBaseURL:url];
     if(self)
     {
-        NSString *cerPath = [[NSBundle mainBundle] pathForResource:@"keystore" ofType:@"cer"];
-        NSData * certData =[NSData dataWithContentsOfFile:cerPath];
-        NSSet * certSet = [[NSSet alloc] initWithObjects:certData, nil];
-        AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeCertificate];
+        AFSecurityPolicy *securityPolicy = [AFSecurityPolicy policyWithPinningMode:AFSSLPinningModeNone];
         [securityPolicy setAllowInvalidCertificates:YES];
-        [securityPolicy setPinnedCertificates:certSet];
         [securityPolicy setValidatesDomainName:NO];
-        if([[url absoluteString]containsString:@"https"])
+        if(_enableSSL)
         {
             self.securityPolicy = securityPolicy;
         }
