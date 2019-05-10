@@ -14,6 +14,8 @@
 #import "Base/Network/NetworkMEx.h"
 #import "Support/NetworkModule/NetworkModule.h"
 
+#import "ViewController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -29,6 +31,12 @@
     
     [[VRTSDKMaster shareInstance] setMasterDelegate:[VRTProtocolModule new]];
     [[VRTSDKMaster shareInstance] setNetworkAdapter:httpAdapter];
+    
+    ViewController* mainVC = [ViewController new];
+    BaseNavigationController* na = [[BaseNavigationController alloc]initWithRootViewController:mainVC];
+    self.window.rootViewController = na;
+    [[ControllerManagerMEx shareInstance] addController:mainVC];
+    [ControllerManagerMEx shareInstance].currentDisplayController = mainVC;
     return YES;
 }
 

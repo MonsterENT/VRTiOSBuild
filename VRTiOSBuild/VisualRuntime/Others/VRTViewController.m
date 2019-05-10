@@ -30,6 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     _vrtInstance.url = _url;
     _vrtInstance.param = _param;
     [_vrtInstance excuteRemoteJS:[NSURL URLWithString:_url] onViewController:self];

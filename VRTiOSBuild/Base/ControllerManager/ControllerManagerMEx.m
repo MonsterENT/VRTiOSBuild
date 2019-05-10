@@ -6,6 +6,8 @@
 //  Copyright © 2017 MonsterENT. All rights reserved.
 //
 
+#warning TOFIX currentDisplayController
+
 #import "ControllerManagerMEx.h"
 #import "WeakMutableArray.h"
 #import "NSObject+ProtocolHelper.h"
@@ -332,6 +334,8 @@ static ControllerManagerMEx* Manager = NULL;
         if([obj isEqual:controller])
         {
             [self releaseControllerNamed:key];
+            NSArray* vcArray = [[controller navigationController] viewControllers];
+            self.currentDisplayController = [vcArray objectAtIndex:vcArray.count - 2];
             if(self.autoTabBarController && ((UIViewController*)obj).navigationController.viewControllers.count == 2)
             {
 #warning TODO

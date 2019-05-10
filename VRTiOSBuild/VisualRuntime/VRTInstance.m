@@ -185,7 +185,7 @@
     };
     
     _context[@"api_pushUrlWithParam"] = ^(NSString* url,NSDictionary* param){
-        if(![url isKindOfClass:[NSString class]] || ![param isKindOfClass:[NSDictionary class]])
+        if(![url isKindOfClass:[NSString class]])
             return ;
         VRTViewController* vc = [VRTViewController new];
         vc.url = url;
@@ -198,7 +198,14 @@
     };
     
     _context[@"api_getPushedParam"] = (NSDictionary*)^(){
-        return weakSelf.param;
+        if(!weakSelf.param)
+        {
+            return @{};
+        }
+        else
+        {
+            return weakSelf.param;
+        }
     };
     
     
@@ -256,7 +263,7 @@
         if(isnan(x))
             return;
         CGRect originFrame = view.frame;
-        view.frame = CGRectMake(x, originFrame.origin.y, originFrame.size.width, originFrame.size.height);
+        view.frame = CGRectMake(x * kWidthPx2PtScale, originFrame.origin.y, originFrame.size.width, originFrame.size.height);
     }
     else if([key isEqualToString:@"_y"])
     {
@@ -264,7 +271,7 @@
         if(isnan(y))
             return;
         CGRect originFrame = view.frame;
-        view.frame = CGRectMake(originFrame.origin.x, y, originFrame.size.width, originFrame.size.height);
+        view.frame = CGRectMake(originFrame.origin.x, y * kWidthPx2PtScale, originFrame.size.width, originFrame.size.height);
     }
     else if([key isEqualToString:@"_height"])
     {
@@ -272,7 +279,7 @@
         if(isnan(height))
             return;
         CGRect originFrame = view.frame;
-        view.frame = CGRectMake(originFrame.origin.x, originFrame.origin.y, originFrame.size.width, height);
+        view.frame = CGRectMake(originFrame.origin.x, originFrame.origin.y, originFrame.size.width, height * kWidthPx2PtScale);
     }
     else if([key isEqualToString:@"_width"])
     {
@@ -280,7 +287,7 @@
         if(isnan(width))
             return;
         CGRect originFrame = view.frame;
-        view.frame = CGRectMake(originFrame.origin.x, originFrame.origin.y, width, originFrame.size.height);
+        view.frame = CGRectMake(originFrame.origin.x, originFrame.origin.y, width * kWidthPx2PtScale, originFrame.size.height);
     }
     else if([key isEqualToString:@"backgroundColor"])
     {
@@ -299,7 +306,7 @@
                 return;
             if(cornerRadius > 0)
             {
-                view.layer.cornerRadius = cornerRadius;
+                view.layer.cornerRadius = cornerRadius * kWidthPx2PtScale;
                 view.clipsToBounds = true;
             }
         }
@@ -316,7 +323,7 @@
             double fontSize = [value toDouble];
             if(isnan(fontSize))
                 return;
-            [view setValue:[UIFont systemFontOfSize:fontSize] forKey:@"font"];
+            [view setValue:[UIFont systemFontOfSize:fontSize * kWidthPx2PtScale] forKey:@"font"];
         }
     }
     else if([key isEqualToString:@"textColor"])

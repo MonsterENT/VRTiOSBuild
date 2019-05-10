@@ -20,7 +20,7 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor blackColor];
     _vrtInstance = [VRTInstance new];
-    [_vrtInstance excuteRemoteJS:[NSURL URLWithString:@"http://21xa689434.imwork.net:8090/public/tmp/VRTDebugger.js"] onViewController:self];
+    [_vrtInstance excuteRemoteJS:[NSURL URLWithString:@"http://21xa689434.imwork.net:8090/public/tmp/VRTDebugger/VRTDebugger.js"] onViewController:self];
     
     [_vrtInstance viewDidLoad_CallBack];
 //    UILabel* main = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
