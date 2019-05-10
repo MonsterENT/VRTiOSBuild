@@ -114,7 +114,7 @@
 
 -(void)dealloc
 {
-    NSLog(@"%@ dealloc %p",self.reuseIdentifier,self);
+//    NSLog(@"%@ dealloc %p",self.reuseIdentifier,self);
 }
 
 

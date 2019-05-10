@@ -357,7 +357,7 @@
 
 -(void)dealloc
 {
-    NSLog(@"TableViewMEx dealloc %@",self.name);
+//    NSLog(@"TableViewMEx dealloc %@",self.name);
 }
 
 #pragma private

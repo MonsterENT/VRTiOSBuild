@@ -6,37 +6,37 @@ const TextAlignmentCenter = "TextAlignmentCenter";
 const TextAlignmentLeft = "TextAlignmentLeft";
 const TextAlignmentRight = "TextAlignmentRight";
 
-function Vec2(x,  y) {
+function Vec2(x, y) {
     this.x = x;
     this.y = y;
 }
 
-function Vec4(x,  y,  z,  w) {
+function Vec4(x, y, z, w) {
     this.x = x;
     this.y = y;
     this.z = z;
     this.w = w;
 }
 
-var redColor = new Vec4(255,  0,  0,  255);
-var greenColor = new Vec4(0,  255,  0,  255);
-var blackColor = new Vec4(0,  0,  0,  255);
-var whiteColor = new Vec4(255,  255,  255,  255);
-var clearColor = new Vec4(0,  0,  0,  0);
+var redColor = new Vec4(255, 0, 0, 255);
+var greenColor = new Vec4(0, 255, 0, 255);
+var blackColor = new Vec4(0, 0, 0, 255);
+var whiteColor = new Vec4(255, 255, 255, 255);
+var clearColor = new Vec4(0, 0, 0, 0);
 
-function createColorWithRGBA(r,  g,  b,  a) {
-    return new Vec4(r,  g,  b,  a);
+function createColorWithRGBA(r, g, b, a) {
+    return new Vec4(r, g, b, a);
 }
 
-function createFrameWithRect(x,  y,  width,  height) {
-    return new Vec4(x,  y,  width,  height);
+function createFrameWithRect(x, y, width, height) {
+    return new Vec4(x, y, width, height);
 }
 
 var _vrt_kvo_responserIndex = 0;
 var _vrt_kvo_responserCache = {};
 var _vrt_kvo_targetCache = {};
 
-function vrt_kvo_bind(target,  key,  func) {
+function vrt_kvo_bind(target, key, func) {
     var hashKey = key + " KVO " + target._vrtId;
     if (_vrt_kvo_targetCache[hashKey] == undefined) {
         var vrt_kvo_target = new Object();
@@ -52,7 +52,7 @@ function vrt_kvo_bind(target,  key,  func) {
     if (_vrt_kvo_responserCache[repHashKey] == undefined) {
         _vrt_kvo_responserCache[repHashKey] = new Array();
         
-        Object.defineProperty(target,  key,  {
+        Object.defineProperty(target, key, {
                               get: function () {
                               return _vrt_kvo_targetCache[hashKey].targetValue;
                               },
@@ -61,7 +61,7 @@ function vrt_kvo_bind(target,  key,  func) {
                               if (_vrt_kvo_responserCache[repHashKey] != undefined) {
                               tmpArray = _vrt_kvo_responserCache[repHashKey];
                               tmpArray.forEach(element => {
-                                               element.callBack(_vrt_kvo_targetCache[hashKey].target,  key,  _vrt_kvo_targetCache[hashKey].targetValue,  value);
+                                               element.callBack(_vrt_kvo_targetCache[hashKey].target, key, _vrt_kvo_targetCache[hashKey].targetValue, value);
                                                });
                               }
                               _vrt_kvo_targetCache[hashKey].targetValue = value;
@@ -78,7 +78,7 @@ function vrt_kvo_bind(target,  key,  func) {
 
 var _vrt_callback_cache = {};
 
-function _addCallBack(key,  func) {
+function _addCallBack(key, func) {
     _vrt_callback_cache[key] = func;
 }
 
@@ -88,13 +88,15 @@ function _api_responseBasicCallBack(key) {
         func();
 }
 
-function _api_responseListDidSelectRow(key,  section,  row) {
+function _api_responseListDidSelectRow(key, section, row) {
     var func = _vrt_callback_cache[key];
     if (func != null && func != undefined)
-        func(section,  row);
+    {
+        func(section, row);
+    }
 }
 
-function _api_responseTextFieldReturn(key,  text) {
+function _api_responseTextFieldReturn(key, text) {
     var func = _vrt_callback_cache[key];
     if (func != null && func != undefined)
         func(text);
@@ -144,7 +146,7 @@ function vrt_layout(_masterView) {
         return this;
     }
     
-    this.heightRatioToView = function (view,  scale) {
+    this.heightRatioToView = function (view, scale) {
         if (view == null)
             view = this.masterView.superView;
         this.masterView._height = view.height() * scale;
@@ -152,7 +154,7 @@ function vrt_layout(_masterView) {
         return this;
     }
     
-    this.widthRatioToView = function (view,  scale) {
+    this.widthRatioToView = function (view, scale) {
         if (view == null)
             view = this.masterView.superView;
         this.masterView._width = view.width() * scale;
@@ -185,7 +187,7 @@ function vrt_layout(_masterView) {
         return this;
     }
     
-    this.topSpaceToView = function (view,  space) {
+    this.topSpaceToView = function (view, space) {
         space = space;
         if (view == null)
             view = this.masterView.superView;
@@ -223,7 +225,7 @@ function vrt_layout(_masterView) {
         return this;
     }
     
-    this.leftSpaceToView = function (view,  space) {
+    this.leftSpaceToView = function (view, space) {
         space = space;
         if (view == null)
             view = this.masterView.superView;
@@ -236,20 +238,20 @@ function vrt_layout(_masterView) {
     }
 }
 
-function _kvo_add_refresh_prop(view,  key) {
-    vrt_kvo_bind(view,  key,  function (target,  key,  oldVlaue,  newValue) {
-                 api_refreshView(target._vrtId,  key,  newValue);
+function _kvo_add_refresh_prop(view, key) {
+    vrt_kvo_bind(view, key, function (target, key, oldVlaue, newValue) {
+                 api_refreshView(target._vrtId, key, newValue);
                  });
 }
 
 function _registerRefreshView(view) {
-    _kvo_add_refresh_prop(view,  '_x');
-    _kvo_add_refresh_prop(view,  '_y');
-    _kvo_add_refresh_prop(view,  '_height');
-    _kvo_add_refresh_prop(view,  '_width');
+    _kvo_add_refresh_prop(view, '_x');
+    _kvo_add_refresh_prop(view, '_y');
+    _kvo_add_refresh_prop(view, '_height');
+    _kvo_add_refresh_prop(view, '_width');
     
-    _kvo_add_refresh_prop(view,  'backgroundColor');
-    _kvo_add_refresh_prop(view,  'cornerRadius');
+    _kvo_add_refresh_prop(view, 'backgroundColor');
+    _kvo_add_refresh_prop(view, 'cornerRadius');
 }
 
 function View() {
@@ -271,7 +273,7 @@ function View() {
     
     _registerRefreshView(this);
     
-    this.setFrame = function (x,  y,  width,  height) {
+    this.setFrame = function (x, y, width, height) {
         this._x = x;
         this._y = y;
         this._width = width;
@@ -279,7 +281,7 @@ function View() {
     }
     
     this.addClick = function (func) {
-        _addCallBack(this._vrtId,  func);
+        _addCallBack(this._vrtId, func);
         this._enabledUserInteraction = true;
     }
     
@@ -324,36 +326,36 @@ function View() {
     }
     
     this.center = function () {
-        return new Vec2((this.left() + this.right()) / 2.0,  (this.top() + this.bottom()) / 2.0);
+        return new Vec2((this.left() + this.right()) / 2.0, (this.top() + this.bottom()) / 2.0);
     }
 }
 
 
-function ViewController(hasNavigationBar,  hasTabBar) {
+function ViewController(hasNavigationBar, hasTabBar) {
     this._vrtId = -1;
     this.view = new View();
-    this.view.setFrame(0.0,  0.0,  750.0,  1334.0);
+    this.view.setFrame(0.0, 0.0, 750.0, 1334.0);
     this.view.backgroundColor = whiteColor;
     this.view.superView = null;
     this._clsName = 'ViewController';
     this.title = "title";
     
-    _kvo_add_refresh_prop(this,  'title');
+    _kvo_add_refresh_prop(this, 'title');
     
     this.addCallBackViewDidLoad = function (func) {
-        _addCallBack("CallBackViewDidLoad",  func);
+        _addCallBack("CallBackViewDidLoad", func);
     }
     
     this.addCallBackViewWillAppear = function (func) {
-        _addCallBack("CallBackViewWillAppear",  func);
+        _addCallBack("CallBackViewWillAppear", func);
     }
     
     this.addCallBackViewDidAppear = function (func) {
-        _addCallBack("CallBackViewDidAppear",  func);
+        _addCallBack("CallBackViewDidAppear", func);
     }
     
     this.addCallBackViewWillDisappear = function (func) {
-        _addCallBack("CallBackViewWillDisappear",  func);
+        _addCallBack("CallBackViewWillDisappear", func);
     }
 }
 
@@ -367,18 +369,18 @@ function Label() {
     this.numberOfLines = 1;
     this.textAlignment = TextAlignmentLeft;
     
-    _kvo_add_refresh_prop(this,  'text');
-    _kvo_add_refresh_prop(this,  'fontSize');
-    _kvo_add_refresh_prop(this,  'textColor');
-    _kvo_add_refresh_prop(this,  'numberOfLines');
-    _kvo_add_refresh_prop(this,  'textAlignment');
+    _kvo_add_refresh_prop(this, 'text');
+    _kvo_add_refresh_prop(this, 'fontSize');
+    _kvo_add_refresh_prop(this, 'textColor');
+    _kvo_add_refresh_prop(this, 'numberOfLines');
+    _kvo_add_refresh_prop(this, 'textAlignment');
 }
 
 function ImgView() {
     View.call(this);
     this._clsName = 'ImgView';
     this.imageUrl = null;
-    _kvo_add_refresh_prop(this,  'imageUrl');
+    _kvo_add_refresh_prop(this, 'imageUrl');
 }
 
 function List() {
@@ -386,11 +388,11 @@ function List() {
     this._clsName = 'List';
     
     this.addCallBackDidSelectRowAtIndexPath = function (func) {
-        _addCallBack(this._vrtId + "CallBackDidSelectRowAtIndexPath",  func);
+        _addCallBack(this._vrtId + "CallBackDidSelectRowAtIndexPath", func);
     }
     
-    this.reloadData = function (numberOfSections,  offset,  length,  rowDataAtSection) {
-        api_refreshListData(this._vrtId,  numberOfSections,  offset,  length,  rowDataAtSection);
+    this.reloadData = function (numberOfSections, offset, length, rowDataAtSection) {
+        api_refreshListData(this._vrtId, numberOfSections, offset, length, rowDataAtSection);
     }
 }
 
@@ -398,7 +400,7 @@ function Cell() {
     View.call(this);
     this._clsName = 'Cell';
     this.setCellFixHeight = function (fixHeight) {
-        this.setFrame(0,  0,  750,  fixHeight);
+        this.setFrame(0, 0, 750, fixHeight);
     }
 }
 
@@ -410,13 +412,13 @@ function TextField() {
     this.textColor = blackColor;
     this.textAlignment = TextAlignmentLeft;
     
-    _kvo_add_refresh_prop(this,  'text');
-    _kvo_add_refresh_prop(this,  'fontSize');
-    _kvo_add_refresh_prop(this,  'textColor');
-    _kvo_add_refresh_prop(this,  'textAlignment');
+    _kvo_add_refresh_prop(this, 'text');
+    _kvo_add_refresh_prop(this, 'fontSize');
+    _kvo_add_refresh_prop(this, 'textColor');
+    _kvo_add_refresh_prop(this, 'textAlignment');
     
     this.addCallBackDidReturn = function (func) {
-        _addCallBack(this._vrtId + "CallBackDidReturn",  func);
+        _addCallBack(this._vrtId + "CallBackDidReturn", func);
     }
 }
 
@@ -438,8 +440,8 @@ function Navigation() {
     this._clsName = "Navigation";
     this.url = "";
     
-    this.pushUrlWithParam = function (url,  param) {
-        api_pushUrlWithParam(url,  param);
+    this.pushUrlWithParam = function (url, param) {
+        api_pushUrlWithParam(url, param);
     }
     
     this.popThis = function () {
@@ -471,7 +473,7 @@ function Alert() {
     
     this._actions = new Array();
     
-    this.addAction = function (action,  func) {
+    this.addAction = function (action, func) {
         action._acId = this._actions.length;
         _alertActionCache[action._acId] = func;
         this._actions.push(action);
@@ -493,13 +495,13 @@ function AlertAction(title) {
 }
 
 
-function dispatchWithAnimation(duration,  func) {
+function dispatchWithAnimation(duration, func) {
     if (api_platform() == "iOS")
-        api_dispatchWithAnimation(duration,  func);
+        api_dispatchWithAnimation(duration, func);
 }
 
 var _vrt_httpRqe_Cache = {};
-function HttpRequest(url,  func) {
+function HttpRequest(url, func) {
     this.url = url;
     this._param = {};
     
@@ -514,9 +516,9 @@ function HttpRequest(url,  func) {
     _vrt_httpRqe_Cache[url] = func;
 }
 
-function _api_httpResponse(url,  data,  info) {
+function _api_httpResponse(url, data, info) {
     var httpReqFunc = _vrt_httpRqe_Cache[url];
     if (httpReqFunc) {
-        httpReqFunc(data,  info);
+        httpReqFunc(data, info);
     }
 }
