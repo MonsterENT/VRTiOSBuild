@@ -190,7 +190,7 @@
         VRTViewController* vc = [VRTViewController new];
         vc.url = url;
         vc.param = param;
-        [vc push];
+        [[ControllerManagerMEx shareInstance]pushController:vc withName:url base:weakSelf.url];
     };
     
     _context[@"api_popThis"] = ^(){
@@ -257,6 +257,7 @@
 
 -(void)refreshView:(UIView*)view withKey:(NSString*)key value:(JSValue*)value
 {
+    [view.superview bringSubviewToFront:view];
     if([key isEqualToString:@"_x"])
     {
         double x = [value toDouble];
