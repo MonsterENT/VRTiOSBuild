@@ -21,10 +21,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = COMMON_DARK;
+    self.view.backgroundColor = COMMON_DARK_DEEP;
     
     UIButton* startBtn = [[UIButton alloc]initWithFrame:CGRectMake(self.view.center.x - BTN_LENGTH_PX / 2.0, self.view.center.y - BTN_LENGTH_PX / 2.0, BTN_LENGTH_PX, BTN_LENGTH_PX)];
-    startBtn.backgroundColor = COMMON_YELLOW;
+    startBtn.backgroundColor = COMMON_DARK;
+    [startBtn setTitleColor:COMMON_YELLOW forState:UIControlStateNormal];
     startBtn.layer.cornerRadius = BTN_LENGTH_PX / 2.0;
     [startBtn setTitle:@"Start" forState:UIControlStateNormal];
     [startBtn addTarget:self action:@selector(startFN) forControlEvents:UIControlEventTouchUpInside];

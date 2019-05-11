@@ -34,6 +34,7 @@
     
     ViewController* mainVC = [ViewController new];
     BaseNavigationController* na = [[BaseNavigationController alloc]initWithRootViewController:mainVC];
+    [na.navigationBar setBarTintColor:COMMON_DARK_DEEP];
     self.window.rootViewController = na;
     [[ControllerManagerMEx shareInstance] addController:mainVC];
     [ControllerManagerMEx shareInstance].currentDisplayController = mainVC;
