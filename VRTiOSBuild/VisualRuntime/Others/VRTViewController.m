@@ -12,28 +12,51 @@
 
 @interface VRTViewController ()
 
-@property(strong,nonatomic)VRTInstance* vrtInstance;
+@property(copy,nonatomic)NSString* url;
+@property(copy,nonatomic)NSDictionary* param;
+@property(copy,nonatomic)NSString* code;
 
+@property(strong,nonatomic)VRTInstance* vrtInstance;
 @end
 
 @implementation VRTViewController
 
--(instancetype)init
++(void)pushWithUrl:(NSString*)url param:(NSDictionary*)param baseControllerName:(nullable NSString*)baseName
 {
-    self = [super init];
-    if(self)
-    {
-        _vrtInstance = [VRTInstance new];
-    }
-    return self;
+    [[VRTSDKMaster shareInstance].httpAdapter getWithSubUrl:url param:@{} block:^(id data, id info) {
+        if(data)
+        {
+            NSString* code = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            VRTViewController* vc = [VRTViewController new];
+            vc.url = url;
+            vc.param = param;
+            vc.code = code;
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if(baseName)
+                {
+                    [[ControllerManagerMEx shareInstance]pushController:vc withName:url base:baseName];
+                }
+                else
+                {
+                    [[ControllerManagerMEx shareInstance]addController:vc withName:url];
+                    [[ControllerManagerMEx shareInstance].currentDisplayController.navigationController pushViewController:vc animated:true];
+                }
+            });
+        }
+    }];
+
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+
+    _vrtInstance = [VRTInstance new];
     _vrtInstance.url = _url;
     _vrtInstance.param = _param;
-    [_vrtInstance excuteRemoteJS:[NSURL URLWithString:_url] onViewController:self];
+    
+    [_vrtInstance excuteCode:_code onViewController:self];
     
     [_vrtInstance viewDidLoad_CallBack];
 }

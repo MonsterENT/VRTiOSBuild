@@ -58,35 +58,20 @@
     return self;
 }
 
--(void)excuteLocalJS:(NSString*)fileName onViewController:(UIViewController*)viewController
+-(void)excuteCode:(NSString*)code onViewController:(UIViewController*)viewController
 {
     _targetVC = viewController;
-    NSString *sourcePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"js"];
-    NSString *script = [NSString stringWithContentsOfFile:sourcePath encoding:NSUTF8StringEncoding error:nil];
-    [_context evaluateScript:script];
-    
-    [self getJSContentCallBack];
-}
-
--(void)excuteRemoteJS:(NSURL*)url onViewController:(UIViewController*)viewController
-{
-    _targetVC = viewController;
-    _url = url.absoluteString;
     
     NSString *sourcePath = [[NSBundle mainBundle] pathForResource:@"VRTJSFramework" ofType:@"js"];
     NSString *frameworkJS = [NSString stringWithContentsOfFile:sourcePath encoding:NSUTF8StringEncoding error:nil];
     
-    //    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    NSString *script = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+    NSString *script = code;
     if(script == nil)
     {
         return;
     }
-    //        dispatch_async(dispatch_get_main_queue(), ^{
     [self.context evaluateScript:[frameworkJS stringByAppendingString:script]];
     [self getJSContentCallBack];
-    //        });
-    //    });
 }
 
 -(void)getJSContentCallBack
@@ -187,10 +172,7 @@
     _context[@"api_pushUrlWithParam"] = ^(NSString* url,NSDictionary* param){
         if(![url isKindOfClass:[NSString class]])
             return ;
-        VRTViewController* vc = [VRTViewController new];
-        vc.url = url;
-        vc.param = param;
-        [[ControllerManagerMEx shareInstance]pushController:vc withName:url base:weakSelf.url];
+        [VRTViewController pushWithUrl:url param:param baseControllerName:weakSelf.url];
     };
     
     _context[@"api_popThis"] = ^(){

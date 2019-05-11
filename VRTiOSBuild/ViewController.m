@@ -9,46 +9,31 @@
 #import "ViewController.h"
 #import "VRTSDKMaster.h"
 #import "VisualRuntime/VRTInstance.h"
+#import "VisualRuntime/Others/VRTViewController.h"
+#import "VisualRuntime/VRTMacro.h"
+
+#define BTN_LENGTH_PX (200 * kWidthPx2PtScale)
+
 @interface ViewController ()
-@property(strong,nonatomic)VRTInstance* vrtInstance;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor whiteColor];
-    _vrtInstance = [VRTInstance new];
-    [_vrtInstance excuteRemoteJS:[NSURL URLWithString:@"http://21xa689434.imwork.net:8090/public/tmp/VRTJSFramework/code/VRTDebugger/VRTDebugger.js"] onViewController:self];
+    self.view.backgroundColor = COMMON_DARK;
     
-    [_vrtInstance viewDidLoad_CallBack];
-//    UILabel* main = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 100)];
-//    main.text = @"FFF";
-//    main.backgroundColor = [UIColor whiteColor];
-//    main.font = [UIFont systemFontOfSize:15];
-//    [self.view addSubview:main];
-    
+    UIButton* startBtn = [[UIButton alloc]initWithFrame:CGRectMake(self.view.center.x - BTN_LENGTH_PX / 2.0, self.view.center.y - BTN_LENGTH_PX / 2.0, BTN_LENGTH_PX, BTN_LENGTH_PX)];
+    startBtn.backgroundColor = COMMON_YELLOW;
+    startBtn.layer.cornerRadius = BTN_LENGTH_PX / 2.0;
+    [startBtn setTitle:@"Start" forState:UIControlStateNormal];
+    [startBtn addTarget:self action:@selector(startFN) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:startBtn];
 }
 
-
--(void)viewWillAppear:(BOOL)animated
+-(void)startFN
 {
-    [super viewWillAppear:animated];
-    [_vrtInstance viewWillAppear_CallBack];
+    [VRTViewController pushWithUrl:@"http://21xa689434.imwork.net:8090/public/tmp/VRTJSFramework/code/VRTDebugger/VRTDebugger.js" param:@{} baseControllerName:nil];
 }
-
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    [_vrtInstance viewDidAppear_CallBack];
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [_vrtInstance viewWillDisappear_CallBack];
-}
-
 
 @end

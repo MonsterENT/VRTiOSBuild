@@ -12,8 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VRTViewController : UIViewController
 
-@property(copy,nonatomic)NSString* url;
-@property(copy,nonatomic)NSDictionary* param;
++(void)pushWithUrl:(NSString*)url param:(NSDictionary*)param baseControllerName:(nullable NSString*)baseName;
 
 @end
 

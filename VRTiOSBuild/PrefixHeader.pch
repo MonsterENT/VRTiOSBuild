@@ -67,7 +67,11 @@ block();\
 
 #define gAppDelegate ((AppDelegate*)[UIApplication sharedApplication].delegate)
 
+#define COMMON_DARK (rgba(50,51,52,1))
+#define COMMON_DARK_DEEP (rgba(40,41,42,1))
+#define COMMON_LIGHT (rgba(165,166,167,1))
 
+#define COMMON_YELLOW (rgba(255,153,18,1))
 
 //MonsterENT Extra
 #import "NSObject+ProtocolHelper.h"
@@ -80,6 +84,6 @@ block();\
 
 #import "WeakMutableArray.h"
 #import "TVCBindHelperMEx.h"
-#endif /* PrefixHeader_pch */
 
+#endif /* PrefixHeader_pch */
 #endif

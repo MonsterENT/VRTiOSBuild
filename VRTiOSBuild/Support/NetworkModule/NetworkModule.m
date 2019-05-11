@@ -33,10 +33,6 @@
             self.securityPolicy = securityPolicy;
         }
         
-        self.responseSerializer = [AFJSONResponseSerializer serializer];
-        
-        self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/plain", @"text/javascript", @"text/json", @"text/html", nil];
-        
         [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         [self.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     }
@@ -46,6 +42,10 @@
 
 -(void)POSTHttpRequestWithSubUrl:(NSString*)url param:(NSDictionary*)param successBlock:(NetworkBaseBlock)successBlock failBlock:(NetworkBaseBlock)failBlock
 {
+    self.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/plain", @"text/javascript", @"text/json", @"text/html", nil];
+    
     [self POST:url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -57,6 +57,10 @@
 
 -(void)GETHttpRequestWithSubUrl:(NSString*)url param:(NSDictionary*)param successBlock:(NetworkBaseBlock)successBlock failBlock:(NetworkBaseBlock)failBlock
 {
+    self.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"application/javascript", @"text/plain", @"text/javascript", @"text/json", @"text/html", nil];
+    
     [self GET:url parameters:param progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

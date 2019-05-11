@@ -12,9 +12,7 @@
 @class VRTMutableDictionary;
 @interface VRTInstance : NSObject
 
--(void)excuteLocalJS:(NSString*)fileName onViewController:(UIViewController*)viewController;
-
--(void)excuteRemoteJS:(NSURL*)url onViewController:(UIViewController*)viewController;
+-(void)excuteCode:(NSString*)code onViewController:(UIViewController*)viewController;
 
 -(void)viewDidLoad_CallBack;
 -(void)viewWillAppear_CallBack;

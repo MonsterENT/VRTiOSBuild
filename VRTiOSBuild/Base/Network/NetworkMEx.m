@@ -103,7 +103,7 @@ static NetworkMEx* instance;
 
 -(id)resolveData:(id)data withSubUrl:(NSString*)subUrl
 {
-    if(data)
+    if(data && [data isKindOfClass:[NSDictionary class]])
     {
         if([[data objectForKey:@"info"] isKindOfClass:[NSString class]])
         {
