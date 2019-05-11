@@ -12,6 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @protocol VRTTextFieldDelegate <NSObject>
 -(void)vrtTextFieldShouldReturn:(NSString*)text vrtId:(NSString*)vrtId;
+-(void)vrtTextFieldDidChange:(NSString*)text vrtId:(NSString*)vrtId;
 @end
 
 @interface VRTTextField : UITextField

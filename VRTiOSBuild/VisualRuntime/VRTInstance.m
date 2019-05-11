@@ -389,4 +389,9 @@
 {
     [_textFieldReturnCallBack.value callWithArguments:@[[NSString stringWithFormat:@"%@CallBackDidReturn",vrtId],text]];
 }
+
+-(void)vrtTextFieldDidChange:(NSString *)text vrtId:(NSString *)vrtId
+{
+    [_textFieldReturnCallBack.value callWithArguments:@[[NSString stringWithFormat:@"%@CallBackDidChange",vrtId],text]];
+}
 @end

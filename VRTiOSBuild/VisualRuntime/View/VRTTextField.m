@@ -29,5 +29,11 @@
     return true;
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    [_vrt_delegate vrtTextFieldDidChange:[textField.text stringByReplacingCharactersInRange:range withString:string] vrtId:self.originModel.vrtId];
+    return true;
+}
+
 
 @end
