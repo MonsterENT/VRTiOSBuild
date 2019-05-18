@@ -12,6 +12,7 @@
 #import <JavaScriptCore/JavaScriptCore.h>
 
 #import "VRTMacro.h"
+#import "VRTGlobalManager.h"
 
 #import "View/VRTTextField.h"
 #import "View/VRTList.h"
@@ -62,15 +63,11 @@
 {
     _targetVC = viewController;
     
-    NSString *sourcePath = [[NSBundle mainBundle] pathForResource:@"VRTJSFramework" ofType:@"js"];
-    NSString *frameworkJS = [NSString stringWithContentsOfFile:sourcePath encoding:NSUTF8StringEncoding error:nil];
-    
-    NSString *script = code;
-    if(script == nil)
+    if(code == nil)
     {
         return;
     }
-    [self.context evaluateScript:[frameworkJS stringByAppendingString:script]];
+    [self.context evaluateScript:[[VRTGlobalManager shareInstance].frameworkCode stringByAppendingString:code]];
     [self getJSContentCallBack];
 }
 

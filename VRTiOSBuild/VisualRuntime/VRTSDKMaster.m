@@ -7,6 +7,7 @@
 //
 
 #import "VRTSDKMaster.h"
+#import "VRTGlobalManager.h"
 
 @interface VRTSDKMaster()
 @property(strong, nonatomic)id<VRTSDKMasterDelegate> sdkMasterDelegate;
@@ -21,6 +22,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [VRTSDKMaster new];
+        [VRTGlobalManager shareInstance].frameworkCode = [NSString stringWithContentsOfURL:[NSURL URLWithString:@"http://21xa689434.imwork.net:8090/public/tmp/VRTJSFramework/code/VRTJSFramework.js"] encoding:NSUTF8StringEncoding error:nil];
     });
     return instance;
 }

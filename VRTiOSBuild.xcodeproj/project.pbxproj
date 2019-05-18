@@ -46,9 +46,9 @@
 		C214BFBE225FA338005BBC0F /* TableViewMEx.m in Sources */ = {isa = PBXBuildFile; fileRef = C214BFB3225FA337005BBC0F /* TableViewMEx.m */; };
 		C214BFBF225FA338005BBC0F /* UITableViewCell+MEx.m in Sources */ = {isa = PBXBuildFile; fileRef = C214BFB4225FA337005BBC0F /* UITableViewCell+MEx.m */; };
 		C214BFC52262139A005BBC0F /* VRTProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = C214BFC42262139A005BBC0F /* VRTProtocol.m */; };
-		C21FA4FF2265C96D00DC79FB /* VRTJSFramework.js in Resources */ = {isa = PBXBuildFile; fileRef = C21FA4FE2265C96D00DC79FB /* VRTJSFramework.js */; };
 		C21FA5032265D71F00DC79FB /* VRTProtocolModule.m in Sources */ = {isa = PBXBuildFile; fileRef = C21FA5022265D71F00DC79FB /* VRTProtocolModule.m */; };
 		C21FA5072265D98D00DC79FB /* NetworkModule.m in Sources */ = {isa = PBXBuildFile; fileRef = C21FA5062265D98D00DC79FB /* NetworkModule.m */; };
+		C286EDF322881527005FC592 /* VRTGlobalManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C286EDF222881527005FC592 /* VRTGlobalManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,11 +149,12 @@
 		C214BFC1225FA3B8005BBC0F /* VRTMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VRTMacro.h; sourceTree = "<group>"; };
 		C214BFC32262139A005BBC0F /* VRTProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VRTProtocol.h; sourceTree = "<group>"; };
 		C214BFC42262139A005BBC0F /* VRTProtocol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VRTProtocol.m; sourceTree = "<group>"; };
-		C21FA4FE2265C96D00DC79FB /* VRTJSFramework.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = VRTJSFramework.js; sourceTree = "<group>"; };
 		C21FA5012265D71F00DC79FB /* VRTProtocolModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VRTProtocolModule.h; sourceTree = "<group>"; };
 		C21FA5022265D71F00DC79FB /* VRTProtocolModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VRTProtocolModule.m; sourceTree = "<group>"; };
 		C21FA5052265D98D00DC79FB /* NetworkModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkModule.h; sourceTree = "<group>"; };
 		C21FA5062265D98D00DC79FB /* NetworkModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkModule.m; sourceTree = "<group>"; };
+		C286EDF122881527005FC592 /* VRTGlobalManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VRTGlobalManager.h; sourceTree = "<group>"; };
+		C286EDF222881527005FC592 /* VRTGlobalManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VRTGlobalManager.m; sourceTree = "<group>"; };
 		E454C81C8177E7E83848D7B8 /* Pods_VRTiOSBuild.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VRTiOSBuild.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -263,13 +264,14 @@
 		C214BF32225F9A80005BBC0F /* VisualRuntime */ = {
 			isa = PBXGroup;
 			children = (
-				C21FA4FE2265C96D00DC79FB /* VRTJSFramework.js */,
-				C214BFC22262135A005BBC0F /* Protocol */,
+				C286EDF122881527005FC592 /* VRTGlobalManager.h */,
+				C286EDF222881527005FC592 /* VRTGlobalManager.m */,
 				C214BFC1225FA3B8005BBC0F /* VRTMacro.h */,
 				C214BF41225F9A80005BBC0F /* VRTInstance.h */,
 				C214BF36225F9A80005BBC0F /* VRTInstance.m */,
 				C214BF40225F9A80005BBC0F /* VRTSDKMaster.h */,
 				C214BF5E225F9A80005BBC0F /* VRTSDKMaster.m */,
+				C214BFC22262135A005BBC0F /* Protocol */,
 				C214BF33225F9A80005BBC0F /* ViewModel */,
 				C214BF42225F9A80005BBC0F /* Model */,
 				C214BF51225F9A80005BBC0F /* View */,
@@ -535,7 +537,6 @@
 				C214BF0D225F9A14005BBC0F /* LaunchScreen.storyboard in Resources */,
 				C214BF0A225F9A14005BBC0F /* Assets.xcassets in Resources */,
 				C214BF08225F9A13005BBC0F /* Main.storyboard in Resources */,
-				C21FA4FF2265C96D00DC79FB /* VRTJSFramework.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,6 +603,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C214BF61225F9A80005BBC0F /* VRTTapGestureRecognizer.m in Sources */,
+				C286EDF322881527005FC592 /* VRTGlobalManager.m in Sources */,
 				C21FA5072265D98D00DC79FB /* NetworkModule.m in Sources */,
 				C214BFB8225FA338005BBC0F /* NetworkMEx.m in Sources */,
 				C214BF68225F9A80005BBC0F /* Model4VRTCell.m in Sources */,
